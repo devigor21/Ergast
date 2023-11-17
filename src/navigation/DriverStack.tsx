@@ -9,12 +9,12 @@ const DriverStack = () => {
   return (
     <Stack.Navigator screenOptions={{}}>
       <Stack.Screen
-        options={{ headerShown: false }}
+        // options={{ headerShown: false }}
         name="DriverList"
         component={DriverListScreen}
       />
       <Stack.Screen
-        options={{ headerShown: false }}
+        // options={{ headerShown: false }}
         name="DriverDetail"
         component={DriverDetailScreen}
       />

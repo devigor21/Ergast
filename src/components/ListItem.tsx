@@ -1,16 +1,28 @@
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, Pressable } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import type { Driver } from '../types/driver';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { DriverStackParamList } from '../types/navigation';
 
 type Props = {
   driver: Driver;
+  i: string;
 };
 
-const ListItem = ({ driver }: Props) => {
+const ListItem = ({ driver, i }: Props) => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<DriverStackParamList>>();
+
   return (
-    <View style={styles.container}>
-      <Text>{driver.givenName}</Text>
-    </View>
+    <Pressable
+      style={styles.container}
+      onPress={() => navigation.navigate('DriverDetail', driver)}>
+      <View style={styles.item}>
+        <Text>{driver.givenName}</Text>
+        <Text>{' ' + driver.familyName}</Text>
+      </View>
+    </Pressable>
   );
 };
 
@@ -22,5 +34,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#fff',
+  },
+  item: {
+    marginVertical: 100,
+    flexDirection: 'row',
   },
 });
