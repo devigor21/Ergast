@@ -1,11 +1,14 @@
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import Navigation from './navigation/Navigation';
-import { store } from './store';
+import { persistor, store } from './store';
 
 const App = () => (
   <Provider store={store}>
-    <Navigation />
+    <PersistGate persistor={persistor}>
+      <Navigation />
+    </PersistGate>
   </Provider>
 );
 

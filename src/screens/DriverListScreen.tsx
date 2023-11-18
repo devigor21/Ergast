@@ -7,12 +7,15 @@ import {
   StyleSheet,
   Text,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import { useActions } from '../hooks/useActions';
-import ListItem from '../components/ListItem';
 import ItemSeparator from '../components/ItemSeparator';
+import DriverItem from '../components/DriverItem';
 import type { Driver } from '../types/driver';
+import type { DriverStackParamList } from '../types/navigation';
 
 const DriverListScreen = () => {
   const { data, loading, error } = useTypedSelector(state => state.driver);
@@ -20,6 +23,9 @@ const DriverListScreen = () => {
 
   const [offset, setOffset] = useState(0);
   const [driverList, setDriverList] = useState<Driver[]>([]);
+
+  const navigation =
+    useNavigation<NativeStackNavigationProp<DriverStackParamList>>();
 
   const list = data?.MRData.DriverTable.Drivers;
   const total = Number(data?.MRData.total);
@@ -45,7 +51,9 @@ const DriverListScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Pressable>
+      <Pressable
+        style={styles.button}
+        onPress={() => navigation.navigate('ResultList')}>
         <Text>Таблица заездов</Text>
       </Pressable>
       {loading && !driverList?.length ? (
@@ -56,9 +64,7 @@ const DriverListScreen = () => {
         <FlatList
           style={{ width: '100%' }}
           data={driverList}
-          renderItem={({ item, index }) => (
-            <ListItem driver={item} i={index.toString()} />
-          )}
+          renderItem={({ item }) => <DriverItem driver={item} />}
           ListFooterComponent={
             loading && driverList?.length ? <ActivityIndicator /> : null
           }
@@ -78,5 +84,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#fff',
+  },
+  button: {
+    padding: 10,
+    borderRadius: 5,
+    backgroundColor: '#CECECE',
   },
 });

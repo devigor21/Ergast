@@ -1,7 +1,7 @@
-import type { apiData } from './apiData';
+import type { ApiData } from './apiData';
 
 export interface DriverState {
-  data: apiData | null;
+  data: ApiData | null;
   loading: boolean;
   error: null | string;
 }
@@ -18,7 +18,7 @@ interface FetchDriversAction {
 
 interface FetchDriversSuccessAction {
   type: DriverActionTypes.FETCH_DRIVERS_SUCCESS;
-  payload: apiData;
+  payload: ApiData;
 }
 
 interface FetchDriversErrorAction {

@@ -1,6 +1,6 @@
 import type { Driver } from './driver';
 
-export type apiData = {
+export type ApiData = {
   MRData: {
     xmlns: string;
     series: string;

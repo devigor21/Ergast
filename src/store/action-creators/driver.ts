@@ -8,15 +8,13 @@ export const fetchDrivers = (offset: number) => {
     try {
       dispatch({ type: DriverActionTypes.FETCH_DRIVERS });
       const response = await axios.get(
-        `https://ergast.com/api/f1/current/drivers.json?limit=5&offset=${offset}`,
+        `https://ergast.com/api/f1/2008/drivers.json?limit=5&offset=${offset}`,
       );
 
-      // setTimeout(() => {
       dispatch({
         type: DriverActionTypes.FETCH_DRIVERS_SUCCESS,
         payload: response.data,
       });
-      // }, 2000);
     } catch (e) {
       dispatch({
         type: DriverActionTypes.FETCH_DRIVERS_ERROR,

@@ -7,10 +7,9 @@ import { DriverStackParamList } from '../types/navigation';
 
 type Props = {
   driver: Driver;
-  i: string;
 };
 
-const ListItem = ({ driver, i }: Props) => {
+const DriverItem = ({ driver }: Props) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<DriverStackParamList>>();
 
@@ -26,7 +25,7 @@ const ListItem = ({ driver, i }: Props) => {
   );
 };
 
-export default ListItem;
+export default DriverItem;
 
 const styles = StyleSheet.create({
   container: {
